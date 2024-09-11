@@ -3,6 +3,7 @@ package dev.alexsandrobezerra.todolist.user;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
@@ -17,6 +18,7 @@ public class UserModel {
     @GeneratedValue(generator = "uuid4")
     private UUID id;
 
+    @Column(unique = true, nullable = false)
     private String username;
 
     private String name;
