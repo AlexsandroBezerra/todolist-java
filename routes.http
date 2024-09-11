@@ -17,6 +17,11 @@ Content-Type: application/json
   "title": "Implementar To Do API",
   "description": "Implementar to do api com Java e Spring Boot.",
   "priority": "high",
-  "startedAt": "2024-09-11T09:00:00",
-  "finishedAt": "2024-09-12T17:00:00"
+  "startedAt": "2024-09-12T09:00:00",
+  "finishedAt": "2024-09-13T17:00:00"
 }
+
+### GET List tasks
+GET http://localhost:8080/tasks
+Authorization: Basic am9obl9kb2U6MTIzNDU2
+Content-Type: application/json
