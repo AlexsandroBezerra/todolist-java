@@ -21,7 +21,7 @@ public class TaskController {
     @GetMapping
     public ResponseEntity list(HttpServletRequest request) {
         final var userId = UUID.fromString(request.getAttribute("userId").toString());
-        var tasks = this.taskRepository.findByUserId(userId);
+        final var tasks = this.taskRepository.findByUserId(userId);
         return ResponseEntity.ok(tasks);
     }
 
@@ -38,10 +38,17 @@ public class TaskController {
             return ResponseEntity.badRequest().body("Data final não pode ser anterior a data inicial");
         }
 
-
-        var createdTask = this.taskRepository.save(taskModel);
-        var location = String.format("/tasks/%s", createdTask.getId());
+        final var createdTask = this.taskRepository.save(taskModel);
+        final var location = String.format("/tasks/%s", createdTask.getId());
         return ResponseEntity.created(URI.create(location)).body(createdTask);
     }
 
+    @PutMapping("/{taskId}")
+    public ResponseEntity update(@PathVariable UUID taskId, @RequestBody TaskModel taskModel, HttpServletRequest request) {
+        final var userId = UUID.fromString(request.getAttribute("userId").toString());
+        taskModel.setUserId(userId);
+        taskModel.setId(taskId);
+        final var updatedTask = this.taskRepository.save(taskModel);
+        return ResponseEntity.ok(updatedTask);
+    }
 }
