@@ -10,6 +10,7 @@ Content-Type: application/json
 
 ### POST Create task
 POST http://localhost:8080/tasks
+Authorization: Basic am9obl9kb2U6MTIzNDU2
 Content-Type: application/json
 
 {
@@ -17,6 +18,5 @@ Content-Type: application/json
   "description": "Implementar to do api com Java e Spring Boot.",
   "priority": "high",
   "startedAt": "2024-09-11T09:00:00",
-  "finishedAt": "2024-09-12T17:00:00",
-  "userId": "887f06c3-7975-4332-adc8-471476f36940"
+  "finishedAt": "2024-09-12T17:00:00"
 }
