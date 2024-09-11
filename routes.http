@@ -27,7 +27,7 @@ Content-Type: application/json
 }
 
 ### Update task
-PUT http://localhost:8080/tasks/9cdda137-7532-4842-91e7-16de32104a4f
+PUT http://localhost:8080/tasks/5fe7ccf9-0b86-41d3-8964-2e56120ba340
 Authorization: Basic am9obl9kb2U6MTIzNDU2
 Content-Type: application/json
 
@@ -37,4 +37,13 @@ Content-Type: application/json
   "priority": "high",
   "startedAt": "2024-09-12T09:00:00",
   "finishedAt": "2024-09-13T17:00:00"
+}
+
+### Partial update task
+PATCH http://localhost:8080/tasks/5fe7ccf9-0b86-41d3-8964-2e56120ba340
+Authorization: Basic am9obl9kb2U6MTIzNDU2
+Content-Type: application/json
+
+{
+  "priority": "medium"
 }

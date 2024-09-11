@@ -1,5 +1,6 @@
 package dev.alexsandrobezerra.todolist.task;
 
+import dev.alexsandrobezerra.todolist.utils.Utils;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -49,6 +50,14 @@ public class TaskController {
         taskModel.setUserId(userId);
         taskModel.setId(taskId);
         final var updatedTask = this.taskRepository.save(taskModel);
+        return ResponseEntity.ok(updatedTask);
+    }
+
+    @PatchMapping("/{taskId}")
+    public ResponseEntity patch(@PathVariable UUID taskId, @RequestBody TaskModel taskModel, HttpServletRequest request) {
+        var task = this.taskRepository.findById(taskId).orElseThrow();
+        Utils.copyNonNullProperties(taskModel, task);
+        var updatedTask = this.taskRepository.save(task);
         return ResponseEntity.ok(updatedTask);
     }
 }
