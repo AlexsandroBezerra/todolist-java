@@ -2,6 +2,7 @@ package dev.alexsandrobezerra.todolist.task;
 
 import dev.alexsandrobezerra.todolist.utils.Utils;
 import jakarta.servlet.http.HttpServletRequest;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -55,9 +56,13 @@ public class TaskController {
 
     @PatchMapping("/{taskId}")
     public ResponseEntity patch(@PathVariable UUID taskId, @RequestBody TaskModel taskModel, HttpServletRequest request) {
+        final var userId = UUID.fromString(request.getAttribute("userId").toString());
         var task = this.taskRepository.findById(taskId).orElseThrow();
+        if (task.getUserId().equals(userId)) {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+        }
         Utils.copyNonNullProperties(taskModel, task);
-        var updatedTask = this.taskRepository.save(task);
+        final var updatedTask = this.taskRepository.save(task);
         return ResponseEntity.ok(updatedTask);
     }
 }
